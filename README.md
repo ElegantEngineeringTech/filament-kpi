@@ -5,7 +5,7 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/elegantengineeringtech/filament-kpi/fix-php-code-styling.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/elegantengineeringtech/filament-kpi/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/elegantly/filament-kpi.svg?style=flat-square)](https://packagist.org/packages/elegantly/filament-kpi)
 
-This plugin allows you to create charts and stats using `elegantly/laravel-kpi` like this:
+This plugin allows you to create charts and stats using [`elegantly/laravel-kpi`](https://github.com/ElegantEngineeringTech/laravel-kpi) like this:
 
 ```php
 use Elegantly\FilamentKpi\Widgets\KpiStat;
