@@ -1,7 +1,8 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace Elegantly\FilamentKpi;
 
+use Elegantly\FilamentKpi\Testing\TestsFilamentKpi;
 use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Assets\Asset;
 use Filament\Support\Assets\Css;
@@ -10,17 +11,14 @@ use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Filesystem\Filesystem;
 use Livewire\Features\SupportTesting\Testable;
-use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use VendorName\Skeleton\Commands\SkeletonCommand;
-use VendorName\Skeleton\Testing\TestsSkeleton;
 
-class SkeletonServiceProvider extends PackageServiceProvider
+class FilamentKpiServiceProvider extends PackageServiceProvider
 {
-    public static string $name = 'skeleton';
+    public static string $name = 'filament-kpi';
 
-    public static string $viewNamespace = 'skeleton';
+    public static string $viewNamespace = 'filament-kpi';
 
     public function configurePackage(Package $package): void
     {
@@ -30,14 +28,7 @@ class SkeletonServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package->name(static::$name)
-            ->hasCommands($this->getCommands())
-            ->hasInstallCommand(function (InstallCommand $command) {
-                $command
-                    ->publishConfigFile()
-                    ->publishMigrations()
-                    ->askToRunMigrations()
-                    ->askToStarRepoOnGitHub(':vendor_slug/:package_slug');
-            });
+            ->hasCommands($this->getCommands());
 
         $configFileName = $package->shortName();
 
@@ -80,18 +71,18 @@ class SkeletonServiceProvider extends PackageServiceProvider
         if (app()->runningInConsole()) {
             foreach (app(Filesystem::class)->files(__DIR__ . '/../stubs/') as $file) {
                 $this->publishes([
-                    $file->getRealPath() => base_path("stubs/skeleton/{$file->getFilename()}"),
-                ], 'skeleton-stubs');
+                    $file->getRealPath() => base_path("stubs/filament-kpi/{$file->getFilename()}"),
+                ], 'filament-kpi-stubs');
             }
         }
 
         // Testing
-        Testable::mixin(new TestsSkeleton);
+        Testable::mixin(new TestsFilamentKpi);
     }
 
     protected function getAssetPackageName(): ?string
     {
-        return ':vendor_slug/:package_slug';
+        return 'elegantly/filament-kpi';
     }
 
     /**
@@ -100,9 +91,9 @@ class SkeletonServiceProvider extends PackageServiceProvider
     protected function getAssets(): array
     {
         return [
-            // AlpineComponent::make('skeleton', __DIR__ . '/../resources/dist/components/skeleton.js'),
-            Css::make('skeleton-styles', __DIR__ . '/../resources/dist/skeleton.css'),
-            Js::make('skeleton-scripts', __DIR__ . '/../resources/dist/skeleton.js'),
+            // AlpineComponent::make('filament-kpi', __DIR__ . '/../resources/dist/components/filament-kpi.js'),
+            // Css::make('filament-kpi-styles', __DIR__ . '/../resources/dist/filament-kpi.css'),
+            // Js::make('filament-kpi-scripts', __DIR__ . '/../resources/dist/filament-kpi.js'),
         ];
     }
 
@@ -111,9 +102,7 @@ class SkeletonServiceProvider extends PackageServiceProvider
      */
     protected function getCommands(): array
     {
-        return [
-            SkeletonCommand::class,
-        ];
+        return [];
     }
 
     /**
@@ -145,8 +134,6 @@ class SkeletonServiceProvider extends PackageServiceProvider
      */
     protected function getMigrations(): array
     {
-        return [
-            'create_skeleton_table',
-        ];
+        return [];
     }
 }
